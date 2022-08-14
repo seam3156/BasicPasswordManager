@@ -3,18 +3,22 @@
 from cryptography.fernet import Fernet
 options = ["l", "a", "q"]
 
+#reads encryption key
 with open("passkey.key", "rb") as thekey:
     key = thekey.read()
 
+#lists all current passwords
 def listpasswords():
     with open("passwords.txt", "r") as file:
         contents = file.read()
         print(contents)
 
+#adds a new password
 def addpassword(password):
     with open("passwords.txt", "a") as file:
         file.write(password+"\n")
 
+#encrypts the passwords
 def encrypt(key):
     with open("passwords.txt", "rb") as file:
         contents = file.read()
@@ -22,6 +26,7 @@ def encrypt(key):
         encrypted_contents = Fernet(key).encrypt(contents)
         file.write(encrypted_contents)
 
+#decrypts the password
 def decrypt(key):
     with open("passwords.txt", "rb") as file:
         contents = file.read()
@@ -29,6 +34,7 @@ def decrypt(key):
         decrypted_contents = Fernet(key).decrypt(contents)
         file.write(decrypted_contents)
 
+#main program
 decrypt(key)
 
 print("\nPASSWORD MANAGER")
