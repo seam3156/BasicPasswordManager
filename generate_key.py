@@ -18,7 +18,6 @@ def encrypt(key):
         encrypted_contents = Fernet(key).encrypt(contents)
         file.write(encrypted_contents)
 
-
 with open("passkey.key", "rb") as thekey:
     key = thekey.read()
 decrypt(key)
